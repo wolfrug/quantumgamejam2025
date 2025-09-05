@@ -3,13 +3,13 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 .utmp/
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Ll]ibrary/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Tt]emp/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Oo]bj/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Bb]uild/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Bb]uilds/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Ll]ogs/
+/QuantumGameJam2025/Quantum Game Jam 2025/[Uu]ser[Ss]ettings/
 *.log
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
