@@ -1,5 +1,9 @@
 // Functions file!
 
+LIST story_objects = Test, Test2
+
+
+
 EXTERNAL EXT_AddToList(x,y)
 EXTERNAL EXT_RemoveFromList(x,y)
 EXTERNAL EXT_AddToDictionary(x,y,z)
@@ -35,9 +39,9 @@ EXTERNAL EXT_GetValue(x,y)
 ~list = EXT_AddToDictionary(key, value, list)
 ===function RemoveFromDictionary(key, ref list)
 ~list = EXT_RemoveFromDictionary(key, list)
-===function HasValue(key, ref list)
+===function HasValue(key, list)
 ~return EXT_HasValue(key, list)
-===function GetValue(key, ref list)
+===function GetValue(key, list)
 ~return EXT_GetValue(key, list)
 
 ===function IsInteractable(b)
@@ -46,3 +50,6 @@ INTERACTABLE(true)
 -else:
 INTERACTABLE(false)
 }
+
+CONST ALICE = "SET_TEXTBOX(alice)"
+CONST HATTER = "SET_TEXTBOX(hatter)"

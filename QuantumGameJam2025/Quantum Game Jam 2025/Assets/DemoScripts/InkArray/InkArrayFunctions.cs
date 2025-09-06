@@ -13,6 +13,7 @@ namespace InkEngine
 
         public void Awake()
         {
+            m_data.InitStory();
             m_data.InkStory.BindExternalFunction("EXT_AddToList", (string arg0, string arg1) => { return AddString(arg0, arg1); });
             m_data.InkStory.BindExternalFunction("EXT_RemoveFromList", (string arg0, string arg1) => { return RemoveString(arg0, arg1); });
             m_data.InkStory.BindExternalFunction("EXT_AddToDictionary", (string arg0, string arg1, string arg2) => { return AddStringDictionary(arg0, arg1, arg2); });

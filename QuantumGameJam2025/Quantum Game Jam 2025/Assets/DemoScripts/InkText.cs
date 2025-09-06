@@ -19,7 +19,7 @@ namespace InkEngine {
         [Tooltip ("For regular ink tags, e.g. #playmusic (do not include the hashtag)")]
         public TextTagFoundEvent m_inkTagFoundEvent;
         protected TextMeshProUGUI m_targetText;
-        void Awake () {
+        protected virtual void Awake () {
             if (m_storyData == null) {
                 m_storyData = Resources.LoadAll<InkStoryData> ("InkStoryData") [0];
             }

@@ -14,8 +14,14 @@ public class SubmitAnswerEventArgs
     public string answer;
     public DissolveObject currentTarget;
     public bool wasTriggerWord;
-
     public float coherenceIncrease;
+    public string targetKnot;
+}
+
+[System.Serializable]
+public class DesktopUIEventsArgs
+{
+    public FolderButton folderButton;
 }
 
 public static class GlobalEvents
@@ -24,6 +30,7 @@ public static class GlobalEvents
     public delegate void SubmitAnswerEvent(SubmitAnswerEventArgs eventArgs);
     public static SubmitAnswerEvent OnSubmittedAnswer;
     public static SubmitAnswerEvent OnSubmittedAnswerDone;
+    public static SubmitAnswerEvent OnObjectComplete;
     public static void SendOnSubmitAnswer(SubmitAnswerEventArgs args)
     {
         OnSubmittedAnswer?.Invoke(args);
@@ -32,7 +39,18 @@ public static class GlobalEvents
     {
         OnSubmittedAnswerDone?.Invoke(args);
     }
+    public static void SendOnObjectComplete(SubmitAnswerEventArgs args)
+    {
+        OnObjectComplete?.Invoke(args);
+    }
 
+    // Desktop UI events
+    public delegate void DesktopUIEvent(DesktopUIEventsArgs eventArgs);
+    public static DesktopUIEvent OnClickedFolder;
+    public static void SendOnClickedFolder(DesktopUIEventsArgs args)
+    {
+        OnClickedFolder?.Invoke(args);
+    }
     // Game events
     public delegate void GameEvent(GameEventArgs eventArgs);
     public static GameEvent OnObjectivesComplete;

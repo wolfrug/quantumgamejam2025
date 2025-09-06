@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fab09ecab8ea67a48b38aa09e7fb409b
+guid: 775fcf5b3d17bda4da9d921bd970e045
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -707298657281561666
-    second: chat screen-min_0
+      213: 8724147442618158357
+    second: chat text box_inverted_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chat screen-min_0
+      name: chat text box_inverted_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 1964
+        height: 663
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 26, y: 24, z: 347, w: 94}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ebb2f9e5e9b2f26f0800000000000000
-      internalID: -707298657281561666
+      spriteID: 51d436560e5621970800000000000000
+      internalID: 8724147442618158357
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0af154b8c98d1204c8e612d9390cc264
+    spriteID: ef54c01d85c911c41bc6f2a8f9331f73
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      chat screen-min_0: -707298657281561666
+      chat text box_inverted_0: 8724147442618158357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

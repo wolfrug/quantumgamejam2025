@@ -28,5 +28,13 @@ MonoBehaviour:
   - variableName: OBJECTIVE
   - variableName: DIFFICULTY
   - variableName: TRIGGER_WORDS
-  m_sprites: []
-  m_prefabs: []
+  - variableName: ALICE
+  - variableName: MADHATTER
+  m_sprites:
+  - id: testImage
+    sprite: {fileID: -9112904188183603947, guid: b06663b4a853891498ac5054650a1ce7, type: 3}
+  m_prefabs:
+  - id: alice
+    prefab: {fileID: 3607624278415344467, guid: 526e62bdf848db94c8d77336ea9959f4, type: 3}
+  - id: hatter
+    prefab: {fileID: 8165982446749685787, guid: 906ddb64903d8b84294dda7ac0606f09, type: 3}
