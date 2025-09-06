@@ -31,6 +31,7 @@ public static class GlobalEvents
     public static SubmitAnswerEvent OnSubmittedAnswer;
     public static SubmitAnswerEvent OnSubmittedAnswerDone;
     public static SubmitAnswerEvent OnObjectComplete;
+    public static SubmitAnswerEvent OnObjectFailed;
     public static void SendOnSubmitAnswer(SubmitAnswerEventArgs args)
     {
         OnSubmittedAnswer?.Invoke(args);
@@ -42,6 +43,10 @@ public static class GlobalEvents
     public static void SendOnObjectComplete(SubmitAnswerEventArgs args)
     {
         OnObjectComplete?.Invoke(args);
+    }
+    public static void SendOnObjectFailed(SubmitAnswerEventArgs args)
+    {
+        OnObjectFailed?.Invoke(args);
     }
 
     // Desktop UI events

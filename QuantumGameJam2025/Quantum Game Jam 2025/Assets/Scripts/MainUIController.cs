@@ -59,6 +59,17 @@ public class MainUIController : MonoBehaviour
         m_chatboxAnimator.SetBool("isActive", !chatboxIsUp);
         chatboxIsUp = !chatboxIsUp;
     }
+    public void MinimizeChatBox()
+    {
+        m_chatboxAnimator.SetBool("isActive", false);
+        chatboxIsUp = false;
+    }
+    public void MaximizeChatBox()
+    {
+        m_chatboxAnimator.SetBool("isActive", true);
+        chatboxIsUp = true;
+    }
+
 
     public void OnClickedDissolveText(InkDialogueLine line, InkTextVariable variable)
     {
@@ -108,10 +119,21 @@ public class MainUIController : MonoBehaviour
             }
             else
             {
-                m_attemptParent.SetActive(true);
-                m_titleText.color = Color.black;
+                if (m_attemptsMade < m_maxAttempts)
+                {
+                    m_attemptParent.SetActive(true);
+                    m_titleText.color = Color.black;
+                }
+                else
+                {
+                    m_attemptParent.SetActive(false);
+                    m_titleText.color = Color.red;
+                }
             }
-            UpdateAttempts();
+            if (m_attemptsMade < m_maxAttempts)
+            {
+                UpdateAttempts();
+            }
         }
     }
 
@@ -169,6 +191,12 @@ public class MainUIController : MonoBehaviour
     void UpdateAttempts()
     {
         m_attemptsLeftText.SetText(string.Format("{0}/{1}", m_attemptsMade, m_maxAttempts));
+        if (m_attemptsMade >= m_maxAttempts)
+        {
+            m_attemptParent.SetActive(false);
+            m_titleText.color = Color.red;
+            GlobalEvents.SendOnObjectFailed(new SubmitAnswerEventArgs { currentTarget = m_currentDissolveObject, targetKnot = m_currentDissolveObject.m_targetKnot });
+        }
     }
     void DeactivateAllDissolveObjects()
     {

@@ -20,8 +20,10 @@ namespace InkEngine {
         public TextTagFoundEvent m_inkTagFoundEvent;
         protected TextMeshProUGUI m_targetText;
         protected virtual void Awake () {
-            if (m_storyData == null) {
-                m_storyData = Resources.LoadAll<InkStoryData> ("InkStoryData") [0];
+            if (m_storyData == null)
+            {
+                m_storyData = Resources.LoadAll<InkStoryData>("InkStoryData")[0];
+                m_storyData.InitStory();
             }
             m_targetText = GetComponent<TextMeshProUGUI> ();
             //UpdateSelf ();

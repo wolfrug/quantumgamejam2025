@@ -11,6 +11,7 @@ namespace InkEngine
     {
         public InkStoryData m_storyObject;
         public bool m_startOnInit = true;
+        public SimpleInkWriter m_mainWriter;
 
         public string m_inkListVariable;
         [Tooltip("Required if we want to -set- a list variable")]
@@ -23,15 +24,21 @@ namespace InkEngine
                 InitStory();
             }
             GlobalEvents.OnObjectComplete += GlobalEvent_OnObjectComplete;
+            GlobalEvents.OnObjectFailed += GlobalEvent_OnObjectFailed;
         }
         void OnDestroy()
         {
             GlobalEvents.OnObjectComplete -= GlobalEvent_OnObjectComplete;
+            GlobalEvents.OnObjectFailed -= GlobalEvent_OnObjectFailed;
         }
 
         void GlobalEvent_OnObjectComplete(SubmitAnswerEventArgs args)
         {
-            
+            m_mainWriter.PlayKnot(args.targetKnot + ".win");
+        }
+        void GlobalEvent_OnObjectFailed(SubmitAnswerEventArgs args)
+        {
+            m_mainWriter.PlayKnot(args.targetKnot + ".lose");
         }
         public void AddToList(string newEntry)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +21,7 @@ public class DissolveSet : MonoBehaviour
         uiImage = GetComponent<Image>();
         uiImage.material = new Material(uiImage.material);
         mat = uiImage.materialForRendering;
-        mat.SetTexture("_FadeTex", noiseTextures[Random.Range(0, noiseTextures.Count)]);
+        mat.SetTexture("_FadeTex", noiseTextures[UnityEngine.Random.Range(0, noiseTextures.Count)]);
         mat.EnableKeyword("_FADE_AMOUNT");
     }
 
@@ -54,7 +55,11 @@ public class DissolveSet : MonoBehaviour
                 mat = uiImage.materialForRendering;
                 lerpLocation = Mathf.Lerp(lerpLocation, location, Time.deltaTime * 2f);
                 mat.SetFloat("_FadeAmount", lerpLocation);
-                Debug.Log("Slerping location from " + lerpLocation + " to " + location);
+                //Debug.Log("Slerping location from " + lerpLocation + " to " + location);
+                if (Mathf.Approximately(lerpLocation, location))
+                {
+                    lerpLocation = location;
+                }
                 //MaskUtilities.NotifyStencilStateChanged(GetComponent<Mask>());
             }
         }
