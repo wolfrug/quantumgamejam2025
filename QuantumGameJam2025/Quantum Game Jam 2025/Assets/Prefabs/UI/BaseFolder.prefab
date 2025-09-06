@@ -499,7 +499,7 @@ RectTransform:
   m_GameObject: {fileID: 2192913526021365321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4622317464258525318}
@@ -798,7 +798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pictures
+  m_text: Folder #1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4c07d446ed6fa04780c7ab5bace37da, type: 2}
   m_sharedMaterial: {fileID: 8257411516207198419, guid: c4c07d446ed6fa04780c7ab5bace37da, type: 2}

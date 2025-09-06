@@ -13,6 +13,8 @@ namespace InkEngine
         public bool m_startOnInit = true;
         public SimpleInkWriter m_mainWriter;
 
+        public string m_startKnot = "start";
+
         public string m_inkListVariable;
         [Tooltip("Required if we want to -set- a list variable")]
         public string m_originListVariable;
@@ -30,6 +32,14 @@ namespace InkEngine
         {
             GlobalEvents.OnObjectComplete -= GlobalEvent_OnObjectComplete;
             GlobalEvents.OnObjectFailed -= GlobalEvent_OnObjectFailed;
+        }
+
+        void Start()
+        {
+            if (m_startKnot != "")
+            {
+                m_mainWriter.PlayKnot(m_startKnot);
+            }
         }
 
         void GlobalEvent_OnObjectComplete(SubmitAnswerEventArgs args)

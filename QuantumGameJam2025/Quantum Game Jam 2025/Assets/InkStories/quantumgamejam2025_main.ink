@@ -11,6 +11,13 @@ VAR testDictionary = ""
 {ALICE} This is a pink text box.
 {HATTER} And this is a blue one.
 
+* [Let's make a choice shall we.]
+{HATTER} This was a choice.
+* [A choice with options.]
+{HATTER} This is definitely a choice.
+
+ - {ALICE} Well okay then.
+
 ->DONE
 
 ==text_test

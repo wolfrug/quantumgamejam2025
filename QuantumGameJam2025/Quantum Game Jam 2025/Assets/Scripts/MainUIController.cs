@@ -157,6 +157,14 @@ public class MainUIController : MonoBehaviour
             m_textInputField.text = "";
             UpdateInk();
             UpdateAttempts();
+            if (args.successful)
+            {
+                m_mainGameplayPanelAnimator.SetTrigger("right");
+            }
+            else
+            {
+                m_mainGameplayPanelAnimator.SetTrigger("wrong");
+            }
         }
     }
     void GlobalEvents_OnObjectComplete(SubmitAnswerEventArgs args)
