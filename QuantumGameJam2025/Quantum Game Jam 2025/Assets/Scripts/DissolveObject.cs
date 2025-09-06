@@ -28,7 +28,7 @@ public class DissolveObject : MonoBehaviour
         GlobalEvents.OnSubmittedAnswer -= GlobalEvents_OnSubmittedAnswer;
     }
 
-    public void Init(string text, List<string> triggerWords, string targetKnot, float currentLocation, List<string> usedTriggerWords, List<string> usedAllWords, Sprite image = null)
+    public void Init(string text, List<string> triggerWords, string targetKnot, float currentLocation, List<string> usedTriggerWords, List<string> usedAllWords, Sprite image = null, int noiseImage = 0)
     {
         m_text.SetText(text);
         m_setter.SetLocation(currentLocation);
@@ -36,6 +36,7 @@ public class DissolveObject : MonoBehaviour
         m_usedTriggerWords = usedTriggerWords;
         m_usedAllWords = usedAllWords;
         m_targetKnot = targetKnot;
+        m_setter.SetNoiseTexture(noiseImage);
         if (image != null)
         {
             m_image.enabled = true;

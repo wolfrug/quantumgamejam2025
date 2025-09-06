@@ -1,8 +1,8 @@
 INCLUDE quantumgamejam2025_functions.ink
 
-VAR text_test_array= "_difficulty^0.3__attempts^0__completed^0__triggerWords^<denounce><dislike><demoralized><desire><duty>_"
+VAR text_test_array= "_difficulty^0.3__attempts^0__completed^0__noiseImage^3__triggerWords^<denounce><dislike><demoralized><desire><duty>_"
 
-VAR text_test2_array= "_difficulty^0.6__attempts^0__completed^0__triggerWords^<shrinking><beguiled><blame><weakness><men>_"
+VAR text_test2_array= "_difficulty^0.6__attempts^0__completed^0__noiseImage^7__triggerWords^<shrinking><beguiled><blame><weakness><men>_"
 
 VAR testDictionary = ""
 

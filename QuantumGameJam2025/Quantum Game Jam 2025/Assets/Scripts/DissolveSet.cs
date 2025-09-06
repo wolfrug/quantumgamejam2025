@@ -25,6 +25,11 @@ public class DissolveSet : MonoBehaviour
         mat.EnableKeyword("_FADE_AMOUNT");
     }
 
+    public void SetNoiseTexture(int index)
+    {
+        mat.SetTexture("_FadeTex", noiseTextures[Mathf.Clamp(index, 0, noiseTextures.Count - 1)]);
+    }
+
     public void SetLocation(float set)
     {
         location = Mathf.Clamp(set, 0f, 1f);

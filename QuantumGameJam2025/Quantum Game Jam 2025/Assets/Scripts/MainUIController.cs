@@ -81,6 +81,7 @@ public class MainUIController : MonoBehaviour
             string array = m_listenTarget.InkStory.variablesState[targetKnot + "_array"] as string;
             float difficulty = float.Parse(InkArrays.GetStringByKey("difficulty", array));
             int attemptsMade = int.Parse(InkArrays.GetStringByKey("attempts", array));
+            int noiseImageIndex = int.Parse(InkArrays.GetStringByKey("noiseImage", array));
             bool isFinished = int.Parse(InkArrays.GetStringByKey("completed", array)) > 0;
             Debug.Log("Difficulty parsed: " + difficulty);
             string text = line.displayText;
@@ -110,7 +111,7 @@ public class MainUIController : MonoBehaviour
             }
             m_attemptsMade = attemptsMade;
             m_mainGameplayPanelAnimator.SetBool("isActive", true);
-            SetDissolveObject(targetObject, text, triggerWords, targetKnot, difficulty, usedTriggerWords, usedAnyWords, targetSprite);
+            SetDissolveObject(targetObject, text, triggerWords, targetKnot, difficulty, usedTriggerWords, usedAnyWords, targetSprite, noiseImageIndex);
             m_titleText.SetText(variable.VariableArguments[2]);
             if (isFinished)
             {
@@ -213,13 +214,13 @@ public class MainUIController : MonoBehaviour
         m_imageOnlyObject.gameObject.SetActive(false);
     }
 
-    public void SetDissolveObject(DissolveObject target, string text, List<string> triggerWords, string targetKnot, float location, List<string> usedTriggerWords, List<string> usedAnyWords, Sprite targetsprite)
+    public void SetDissolveObject(DissolveObject target, string text, List<string> triggerWords, string targetKnot, float location, List<string> usedTriggerWords, List<string> usedAnyWords, Sprite targetsprite, int noiseImageIndex)
     {
         DeactivateAllDissolveObjects();
         if (target != null)
         {
             target.gameObject.SetActive(true);
-            target.Init(text, triggerWords, targetKnot, location, usedTriggerWords, usedAnyWords, targetsprite);
+            target.Init(text, triggerWords, targetKnot, location, usedTriggerWords, usedAnyWords, targetsprite, noiseImageIndex);
         }
         m_currentDissolveObject = target;
     }
