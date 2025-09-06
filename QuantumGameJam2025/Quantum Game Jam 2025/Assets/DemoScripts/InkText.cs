@@ -18,7 +18,7 @@ namespace InkEngine {
 
         [Tooltip ("For regular ink tags, e.g. #playmusic (do not include the hashtag)")]
         public TextTagFoundEvent m_inkTagFoundEvent;
-        private TextMeshProUGUI m_targetText;
+        protected TextMeshProUGUI m_targetText;
         void Awake () {
             if (m_storyData == null) {
                 m_storyData = Resources.LoadAll<InkStoryData> ("InkStoryData") [0];
@@ -27,7 +27,7 @@ namespace InkEngine {
             //UpdateSelf ();
         }
 
-        public void UpdateSelf () {
+        public virtual void UpdateSelf () {
             string finalString = "";
             InkDialogueLine[] text = m_storyData.CreateStringArrayKnot (m_targetKnot, null, "stringTable");
             for (int i = 0; i < text.Length; i++) {
@@ -40,13 +40,13 @@ namespace InkEngine {
             }
             m_targetText.SetText (finalString);
         }
-        void OnEnable () {
+        protected virtual void OnEnable () {
             if (m_updateOnEnable) {
                 UpdateSelf ();
             };
         }
 
-        void InvokeDialogueEvents (InkDialogueLine currentLine) {
+        protected virtual void InvokeDialogueEvents (InkDialogueLine currentLine) {
             if (currentLine.inkVariables.Count > 0) {
                 foreach (InkTextVariable variable in currentLine.inkVariables) {
                     m_textFunctionFoundEvent.Invoke (currentLine, variable);

@@ -11,7 +11,7 @@ namespace InkEngine
 
         public InkStoryData m_data;
 
-        public void Start()
+        public void Awake()
         {
             m_data.InkStory.BindExternalFunction("EXT_AddToList", (string arg0, string arg1) => { return AddString(arg0, arg1); });
             m_data.InkStory.BindExternalFunction("EXT_RemoveFromList", (string arg0, string arg1) => { return RemoveString(arg0, arg1); });
@@ -19,6 +19,12 @@ namespace InkEngine
             m_data.InkStory.BindExternalFunction("EXT_RemoveFromDictionary", (string arg0, string arg1) => { return RemoveStringDictionary(arg0, arg1); });
             m_data.InkStory.BindExternalFunction("EXT_HasValue", (string arg0, string arg1) => { return ContainsValue(arg0, arg1); });
             m_data.InkStory.BindExternalFunction("EXT_GetValue", (string arg0, string arg1) => { return GetValue(arg0, arg1); });
+
+            m_data.AddSearchableFunction(new InkTextVariable { variableName = "ADD_TO_ARRAY" });
+            m_data.AddSearchableFunction(new InkTextVariable { variableName = "REMOVE_FROM_ARRAY" });
+            m_data.AddSearchableFunction(new InkTextVariable { variableName = "ADD_TO_DICTIONARY" });
+            m_data.AddSearchableFunction(new InkTextVariable { variableName = "REMOVE_FROM_DICTIONARY" });
+            m_data.AddSearchableFunction(new InkTextVariable { variableName = "HAS_VALUE" });
         }
 
         public void EventListener(InkDialogueLine line, InkTextVariable variable)
@@ -64,11 +70,11 @@ namespace InkEngine
             }
         }
 
-        public string AddString(string stringToAdd, string inkarray)
+        public static string AddString(string stringToAdd, string inkarray)
         {
             return InkArrays.SerializeStrings<string>(new List<string> { stringToAdd }, inkarray); ;
         }
-        public string RemoveString(string stringToRemove, string inkarray)
+        public static string RemoveString(string stringToRemove, string inkarray)
         {
 
             List<string> givenArray = InkArrays.DeSerializeString(inkarray);
@@ -78,7 +84,7 @@ namespace InkEngine
             }
             return InkArrays.SerializeStrings<string>(givenArray);
         }
-        public string AddStringDictionary(string stringKey, string stringVal, string inkarray)
+        public static string AddStringDictionary(string stringKey, string stringVal, string inkarray)
         {
             if (!InkArrays.HasValue(stringKey, inkarray))
             {
@@ -100,7 +106,7 @@ namespace InkEngine
                 return InkArrays.SerializeProtoDictionary<string>(currentDict);
             }
         }
-        public string RemoveStringDictionary(string stringKey, string inkarray)
+        public static string RemoveStringDictionary(string stringKey, string inkarray)
         {
 
             if (!InkArrays.HasValue(stringKey, inkarray))
@@ -119,11 +125,11 @@ namespace InkEngine
             }
             return InkArrays.SerializeProtoDictionary<string>(currentDict);
         }
-        public bool ContainsValue(string key, string inkarray)
+        public static bool ContainsValue(string key, string inkarray)
         {
             return InkArrays.HasValue(key, inkarray);
         }
-        public string GetValue(string key, string inkarray)
+        public static string GetValue(string key, string inkarray)
         {
             if (InkArrays.IsProtoDictionary(inkarray))
             {

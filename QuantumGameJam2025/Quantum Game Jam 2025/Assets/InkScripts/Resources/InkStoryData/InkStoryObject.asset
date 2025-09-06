@@ -13,6 +13,26 @@ MonoBehaviour:
   m_Name: InkStoryObject
   m_EditorClassIdentifier: 
   m_ID: default
-  m_inkJsonAsset: {fileID: 4900000, guid: 92bab6750444ee94b986a2eb8472a27d, type: 3}
+  m_inkJsonAsset: {fileID: 4900000, guid: 9685f5e7987ccdf4c864d92765f4a3db, type: 3}
   m_defaultTextVariables: {fileID: 11400000, guid: f1180ca2024c19542bff6ce2cb12ad5e, type: 2}
-  m_searchableTextVariables: []
+  m_searchableTextVariables:
+  - variableName: PLAYER
+  - variableName: USE_ITEM
+  - variableName: SET_OPTIONBOX
+  - variableName: SET_TEXTBOX
+  - variableName: SET_BUTTON_GRAPHIC
+  - variableName: SET_BUTTON_TEXT
+  - variableName: LOAD_SCENE
+  - variableName: PLAYER_BARK
+  - variableName: OTHER_BARK
+  - variableName: SET_STORY_IMAGE
+  - variableName: SET_STORY_TEXT
+  - variableName: OBJECTIVE
+  - variableName: DIFFICULTY
+  - variableName: TRIGGER_WORDS
+  m_textFunctionFoundEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_inkTagFoundEvent:
+    m_PersistentCalls:
+      m_Calls: []

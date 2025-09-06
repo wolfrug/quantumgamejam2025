@@ -8,6 +8,8 @@ public class DissolveSet : MonoBehaviour
     [Range(0f, 1f)]
     public float location = 0f; // 0 = fully visible, 1 = fully dissolved
 
+    private float lerpLocation = 0f;
+
     public List<Texture2D> noiseTextures = new List<Texture2D> { };
 
     Material mat;
@@ -25,6 +27,10 @@ public class DissolveSet : MonoBehaviour
     public void SetLocation(float set)
     {
         location = Mathf.Clamp(set, 0f, 1f);
+        lerpLocation = location;
+        mat = uiImage.materialForRendering;
+        lerpLocation = Mathf.Lerp(lerpLocation, location, Time.deltaTime * 2f);
+        mat.SetFloat("_FadeAmount", lerpLocation);
     }
     public float Location
     {
@@ -43,9 +49,19 @@ public class DissolveSet : MonoBehaviour
     {
         if (mat != null)
         {
+            if (location > lerpLocation || location < lerpLocation)
+            {
+                mat = uiImage.materialForRendering;
+                lerpLocation = Mathf.Lerp(lerpLocation, location, Time.deltaTime * 2f);
+                mat.SetFloat("_FadeAmount", lerpLocation);
+                Debug.Log("Slerping location from " + lerpLocation + " to " + location);
+                //MaskUtilities.NotifyStencilStateChanged(GetComponent<Mask>());
+            }
+        }
+        else
+        {
+            Debug.LogError("Mat is null!");
             mat = uiImage.materialForRendering;
-            mat.SetFloat("_FadeAmount", location);
-            //MaskUtilities.NotifyStencilStateChanged(GetComponent<Mask>());
         }
     }
 }

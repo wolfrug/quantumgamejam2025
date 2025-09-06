@@ -10,26 +10,28 @@ public class DissolveObject : MonoBehaviour
     public Image m_image;
     public DissolveSet m_setter;
     public List<string> m_triggerWords = new List<string> { };
-
+    public List<string> m_usedTriggerWords = new List<string> { };
     public List<string> m_allWords = new List<string> { };
+    public List<string> m_usedAllWords = new List<string> { };
+    public string m_targetKnot;
 
     void Awake()
     {
         GlobalEvents.OnSubmittedAnswer += GlobalEvents_OnSubmittedAnswer;
-
-        m_setter.Location = Random.Range(0.35f, 0.5f);
-        Init(m_text.text, m_triggerWords, m_setter.Location);
     }
     void OnDestroy()
     {
         GlobalEvents.OnSubmittedAnswer -= GlobalEvents_OnSubmittedAnswer;
     }
 
-    public void Init(string text, List<string> triggerWords, float currentLocation)
+    public void Init(string text, List<string> triggerWords, string targetKnot, float currentLocation, List<string> usedTriggerWords, List<string> usedAllWords)
     {
         m_text.SetText(text);
-        m_setter.Location = currentLocation;
+        m_setter.SetLocation(currentLocation);
         m_triggerWords = triggerWords;
+        m_usedTriggerWords = usedTriggerWords;
+        m_usedAllWords = usedAllWords;
+        m_targetKnot = targetKnot;
         // \w+ = one or more word characters (letters, digits, underscore)
         // If you only want letters, use [A-Za-z]+ instead.
         MatchCollection matches = Regex.Matches(m_text.text, @"\w+");
@@ -40,6 +42,16 @@ public class DissolveObject : MonoBehaviour
             m_allWords.Add(match.Value.ToLower()); // lowercase for case-insensitivity
         }
 
+        foreach (string regularWord in m_usedAllWords)
+        {
+            HighlightWord(regularWord, Color.green);
+        }
+        // So it overrides the green with blue ;)
+        foreach (string triggerWord in m_usedTriggerWords)
+        {
+            HighlightWord(triggerWord, Color.blue);
+        }
+
     }
 
     void GlobalEvents_OnSubmittedAnswer(SubmitAnswerEventArgs args)
@@ -47,7 +59,7 @@ public class DissolveObject : MonoBehaviour
         if (args.successful && args.currentTarget == this)
         {
             float successRate = CalculateSuccessRate(args.answer);
-            m_setter.Location += successRate;
+
             Debug.Log("Received answer " + args.answer + " which gained a success rate of " + successRate);
         }
     }
@@ -59,15 +71,19 @@ public class DissolveObject : MonoBehaviour
         {
             returnValue = -Random.Range(0.01f, 0.05f);
             m_allWords.RemoveAll((x) => x == submittedAnswer);
+            m_usedAllWords.Add(submittedAnswer);
             if (m_triggerWords.Contains(submittedAnswer))
             {
                 returnValue -= 0.1f;
                 m_triggerWords.Remove(submittedAnswer);
+                m_usedTriggerWords.Add(submittedAnswer);
+                m_setter.Location += returnValue;
                 GlobalEvents.SendOnSubmitAnswerDone(new SubmitAnswerEventArgs { successful = true, answer = submittedAnswer, currentTarget = this, wasTriggerWord = true, coherenceIncrease = returnValue });
                 HighlightWord(submittedAnswer, Color.blue);
             }
             else
             {
+                m_setter.Location += returnValue;
                 GlobalEvents.SendOnSubmitAnswerDone(new SubmitAnswerEventArgs { successful = true, answer = submittedAnswer, currentTarget = this, wasTriggerWord = false, coherenceIncrease = returnValue });
                 HighlightWord(submittedAnswer, Color.green);
             }
@@ -79,6 +95,7 @@ public class DissolveObject : MonoBehaviour
             {
                 returnValue = 0f;
             }
+            m_setter.Location += returnValue;
             GlobalEvents.SendOnSubmitAnswerDone(new SubmitAnswerEventArgs { successful = false, answer = submittedAnswer, currentTarget = this, wasTriggerWord = false, coherenceIncrease = returnValue });
         }
         return returnValue;

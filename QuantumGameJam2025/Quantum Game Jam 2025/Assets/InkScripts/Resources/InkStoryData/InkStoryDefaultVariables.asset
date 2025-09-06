@@ -25,5 +25,8 @@ MonoBehaviour:
   - variableName: OTHER_BARK
   - variableName: SET_STORY_IMAGE
   - variableName: SET_STORY_TEXT
+  - variableName: OBJECTIVE
+  - variableName: DIFFICULTY
+  - variableName: TRIGGER_WORDS
   m_sprites: []
   m_prefabs: []

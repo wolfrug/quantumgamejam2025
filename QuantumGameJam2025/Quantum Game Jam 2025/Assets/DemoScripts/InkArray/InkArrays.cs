@@ -13,11 +13,22 @@ namespace InkEngine
         private static char delimiterRight = '>';
         private static char delimiterMiddle = '^';
 
+        private static char delimiterLeftDictionary = '_';
+        private static char delimiterRightDictionary = '_';
+
         public static string SerializeStrings<T>(List<T> serializableStrings, string startString = "")
         {
             foreach (var str in serializableStrings)
             {
                 startString += delimiterLeft + str.ToString() + delimiterRight;
+            }
+            return startString;
+        }
+        public static string SerializeDictionaryStrings<T>(List<T> serializableStrings, string startString = "")
+        {
+            foreach (var str in serializableStrings)
+            {
+                startString += delimiterLeftDictionary + str.ToString() + delimiterRightDictionary;
             }
             return startString;
         }
@@ -40,19 +51,41 @@ namespace InkEngine
             }
             return returnList;
         }
+        public static List<string> DeSerializeDictionaryString(string serializedString)
+        {
+            //Debug.Log("trying to deserialize string " + serializedString);
+            List<string> returnList = new List<string> { };
+            // Checks for anything between delimiter brackets and then sends the first match onward.
+            Regex brackets = new Regex(delimiterLeftDictionary + ".*?" + delimiterRightDictionary);
+            MatchCollection matches = brackets.Matches(serializedString);
+            {
+                if (matches.Count > 0)
+                {
+                    //Debug.Log("got matches, for example: " + matches[0]);
+                    for (int i = 0; i < matches.Count; i++)
+                    {
+                        // trim out the actual text
+                        string deserializedString = matches[i].Value.Trim(new Char[] { delimiterLeftDictionary, delimiterRightDictionary, ' ' });
+                        returnList.Add(deserializedString);
+                    }
+                }
+            }
+            return returnList;
+        }
         public static string SerializeProtoDictionary<T>(List<KeyValuePair<string, T>> keyValuePairs, string startString = "")
         {
 
             foreach (KeyValuePair<string, T> kvp in keyValuePairs)
             {
-                startString = SerializeStrings(new List<string> { string.Format("{0}{1}{2}", kvp.Key, delimiterMiddle, kvp.Value) }, startString);
+                startString = SerializeDictionaryStrings(new List<string> { string.Format("{0}{1}{2}", kvp.Key, delimiterMiddle, kvp.Value) }, startString);
             }
             return startString;
         }
         public static List<KeyValuePair<string, string>> DeSerializeProtoDictionary(string serializedString)
         {
             List<KeyValuePair<string, string>> returnList = new List<KeyValuePair<string, string>> { };
-            List<string> deSerializedList = new List<string>(DeSerializeString(serializedString));
+            List<string> deSerializedList = new List<string>(DeSerializeDictionaryString(serializedString));
+            //Debug.Log("return deserialized list count: " + deSerializedList.Count);
             foreach (string str in deSerializedList)
             {
                 string[] kvp = str.Split(delimiterMiddle);
@@ -148,6 +181,7 @@ namespace InkEngine
         public static string GetStringByKey(string key, string serializedString) // use this for protodictionaries, will return "" if does not contain
         {
             List<KeyValuePair<string, string>> checkList = new List<KeyValuePair<string, string>>(DeSerializeProtoDictionary(serializedString));
+            //Debug.Log("Checklist length: " + checkList.Count);
             string returnValue = "";
             returnValue += checkList.Find((x) => x.Key == key).Value;
             return returnValue;
