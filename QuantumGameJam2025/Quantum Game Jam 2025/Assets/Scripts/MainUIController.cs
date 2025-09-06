@@ -16,7 +16,7 @@ public class MainUIController : MonoBehaviour
     public int m_maxAttempts = 10;
     public int m_attemptsMade = 0;
 
-    private DissolveObject m_currentDissolveObject;
+    [SerializeField] private DissolveObject m_currentDissolveObject;
 
     void Awake()
     {
@@ -25,9 +25,12 @@ public class MainUIController : MonoBehaviour
 
     void OnClickSubmit()
     {
-        if (m_maxAttempts < m_attemptsMade && GetAnswer() != "")
+        if (m_maxAttempts > m_attemptsMade && GetAnswer() != "")
         {
             GlobalEvents.SendOnSubmitAnswer(new SubmitAnswerEventArgs { successful = true, answer = GetAnswer(), currentTarget = m_currentDissolveObject });
+            m_attemptsMade++;
+            m_textInputField.text = "";
+            UpdateAttempts();
         }
         else
         {
@@ -38,5 +41,10 @@ public class MainUIController : MonoBehaviour
     string GetAnswer()
     {
         return m_textInputField.text;
+    }
+
+    void UpdateAttempts()
+    {
+        m_attemptsLeftText.SetText(string.Format("{0}/{1}", m_attemptsMade, m_maxAttempts));
     }
 }

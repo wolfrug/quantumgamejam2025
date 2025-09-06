@@ -26,6 +26,17 @@ public class DissolveSet : MonoBehaviour
     {
         location = Mathf.Clamp(set, 0f, 1f);
     }
+    public float Location
+    {
+        set
+        {
+            location = Mathf.Clamp(value, 0f, 1f);
+        }
+        get
+        {
+            return location;
+        }
+    }
 
 
     void LateUpdate()
