@@ -29,7 +29,7 @@ public class FolderButton : MonoBehaviour
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         m_folderNameText.SetText(m_folderName);
         m_selfButton.onClick.AddListener(OnClickedFolder);
@@ -39,7 +39,12 @@ public class FolderButton : MonoBehaviour
         ShowPasswordInput(false);
     }
 
-    public void OpenFolder(bool open)
+    protected virtual void OnDestroy()
+    {
+
+    }
+
+    public virtual void OpenFolder(bool open)
     {
         if (!Locked)
         {
@@ -47,12 +52,12 @@ public class FolderButton : MonoBehaviour
         }
     }
 
-    public void ShowPasswordInput(bool show)
+    public virtual void ShowPasswordInput(bool show)
     {
         m_passwordInputField.gameObject.SetActive(show);
     }
 
-    public bool ShowingPasswordInput
+    public virtual bool ShowingPasswordInput
     {
         get
         {
@@ -60,7 +65,7 @@ public class FolderButton : MonoBehaviour
         }
     }
 
-    void OnClickedFolder()
+    protected virtual void OnClickedFolder()
     {
         GlobalEvents.SendOnClickedFolder(new DesktopUIEventsArgs { folderButton = this });
         if (Locked)
@@ -77,19 +82,20 @@ public class FolderButton : MonoBehaviour
         }
     }
 
-    void OnDeselectInputField(string input)
+    protected virtual void OnDeselectInputField(string input)
     {
         m_passwordInputField.text = "";
         ShowPasswordInput(false);
     }
 
-    void OnInputEnded(string input)
+    protected virtual void OnInputEnded(string input)
     {
         if (input == m_password)
         {
             Locked = false;
             ShowPasswordInput(false);
             OpenFolder(true);
+            GlobalEvents.SendOnUnlockedFolder(new DesktopUIEventsArgs { folderButton = this });
         }
         else
         {

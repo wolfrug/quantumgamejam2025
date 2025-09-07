@@ -27,11 +27,13 @@ namespace InkEngine
             }
             GlobalEvents.OnObjectComplete += GlobalEvent_OnObjectComplete;
             GlobalEvents.OnObjectFailed += GlobalEvent_OnObjectFailed;
+            GlobalEvents.OnUnlockedFolder += GlobalEvent_OnUnlockedFolder;
         }
         void OnDestroy()
         {
             GlobalEvents.OnObjectComplete -= GlobalEvent_OnObjectComplete;
             GlobalEvents.OnObjectFailed -= GlobalEvent_OnObjectFailed;
+            GlobalEvents.OnUnlockedFolder -= GlobalEvent_OnUnlockedFolder;
         }
 
         void Start()
@@ -49,6 +51,22 @@ namespace InkEngine
         void GlobalEvent_OnObjectFailed(SubmitAnswerEventArgs args)
         {
             m_mainWriter.PlayKnot(args.targetKnot + ".lose");
+        }
+        void GlobalEvent_OnUnlockedFolder(DesktopUIEventsArgs args)
+        {
+            switch (args.folderButton.m_folderID)
+            {
+                case "qpac1":
+                    {
+                        m_mainWriter.PlayKnot("opened_qpac");
+                        break;
+                    }
+                case "final":
+                    {
+                        m_mainWriter.PlayKnot("opened_final");
+                        break;
+                    }
+            }
         }
         public void AddToList(string newEntry)
         {

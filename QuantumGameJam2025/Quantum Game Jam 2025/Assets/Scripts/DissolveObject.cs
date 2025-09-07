@@ -81,7 +81,7 @@ public class DissolveObject : MonoBehaviour
         }
     }
 
-    void FinishObject()
+    public void FinishObject()
     {
         m_allWords.AddRange(m_usedAllWords);
         foreach (string regularWord in m_allWords)
@@ -101,6 +101,7 @@ public class DissolveObject : MonoBehaviour
         {
             HighlightWord(triggerWord, m_targetWordColor);
         }
+        m_setter.Location = 0f;
         m_triggerWords.Clear();
         GlobalEvents.SendOnObjectComplete(new SubmitAnswerEventArgs { currentTarget = this, targetKnot = m_targetKnot });
     }
@@ -108,7 +109,7 @@ public class DissolveObject : MonoBehaviour
     float CalculateSuccessRate(string submittedAnswer)
     {
         float returnValue = UnityEngine.Random.Range(0.05f, 0.1f);
-        if (m_allWords.Contains(submittedAnswer))
+        if (m_allWords.Contains(submittedAnswer) || m_triggerWords.Contains(submittedAnswer))
         {
             returnValue = -UnityEngine.Random.Range(0.01f, 0.05f);
             m_allWords.RemoveAll((x) => x == submittedAnswer);
@@ -132,7 +133,7 @@ public class DissolveObject : MonoBehaviour
         }
         else
         {
-            if (ContainsWord(submittedAnswer))
+            if (ContainsWord(submittedAnswer) || m_usedTriggerWords.Contains(submittedAnswer))
             {
                 returnValue = 0f;
             }

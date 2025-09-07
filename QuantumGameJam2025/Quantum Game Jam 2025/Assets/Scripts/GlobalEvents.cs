@@ -52,9 +52,15 @@ public static class GlobalEvents
     // Desktop UI events
     public delegate void DesktopUIEvent(DesktopUIEventsArgs eventArgs);
     public static DesktopUIEvent OnClickedFolder;
+
+    public static DesktopUIEvent OnUnlockedFolder;
     public static void SendOnClickedFolder(DesktopUIEventsArgs args)
     {
         OnClickedFolder?.Invoke(args);
+    }
+    public static void SendOnUnlockedFolder(DesktopUIEventsArgs args)
+    {
+        OnUnlockedFolder?.Invoke(args);
     }
     // Game events
     public delegate void GameEvent(GameEventArgs eventArgs);
