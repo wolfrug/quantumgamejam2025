@@ -194,7 +194,7 @@ public class MainUIController : MonoBehaviour
 
     string GetAnswer()
     {
-        return m_textInputField.text;
+        return m_textInputField.text.ToLowerInvariant();
     }
 
     void UpdateAttempts()

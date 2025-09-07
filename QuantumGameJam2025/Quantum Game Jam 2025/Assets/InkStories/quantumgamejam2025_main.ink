@@ -148,7 +148,7 @@ OBJECTIVE(joes_dog, TEXT_ONLY, joes_doggy.txt)
 {HATTER} Well, better have at it...
 ->DONE
 
-=opened_final
+==opened_final
 {ALICE} Holy shiiit. It worked.
 
 {HATTER} What did?
