@@ -33,6 +33,8 @@ MonoBehaviour:
   m_sprites:
   - id: testImage
     sprite: {fileID: -9112904188183603947, guid: b06663b4a853891498ac5054650a1ce7, type: 3}
+  - id: selfie
+    sprite: {fileID: -1473684086116437639, guid: f2b10a1bf456eb74599397024fb4e57b, type: 3}
   m_prefabs:
   - id: alice
     prefab: {fileID: 3607624278415344467, guid: 526e62bdf848db94c8d77336ea9959f4, type: 3}

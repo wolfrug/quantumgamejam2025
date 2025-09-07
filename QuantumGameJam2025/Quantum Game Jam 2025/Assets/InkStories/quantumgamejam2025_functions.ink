@@ -2,6 +2,11 @@
 
 LIST story_objects = Test, Test2
 
+VAR story_successes = ()
+VAR story_fails = ()
+
+
+
 
 
 EXTERNAL EXT_AddToList(x,y)
